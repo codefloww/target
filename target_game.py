@@ -102,14 +102,14 @@ def results(words, legal_words, pure_words, file):
     for word in words:
         if word in legal_words:
             score += 1
-    print("Your score:" + str(score))
-    print(legal_words)
+    print('Your score:' + str(score))
+    print('Legal words:\n',legal_words)
     missed_words = []
     for word in legal_words:
         if word not in words:
             missed_words.append(word)
-    print(missed_words)
-    print(pure_words)
+    print('You missed:\n',missed_words)
+    print('Some mistakes:\n',pure_words)
     with open(file, "a") as res:
         res.write(str(score) + "\n")
         res.write(", ".join(legal_words) + "\n")
@@ -118,10 +118,21 @@ def results(words, legal_words, pure_words, file):
         res.write("=====" + "\n")
 
 
+def main():
+    grid = generate_grid()
+    display_grid(grid)
+    letters = [grid[i][j].lower() for i in range(len(grid)) for j in range(len(grid[i]))]
+    legal_words = get_words('en',letters)
+    user_words = get_user_words()
+    pure_words = get_pure_user_words(user_words,letters,legal_words)
+    results(user_words,legal_words,pure_words,"results.txt")
+
+
 if __name__ == "__main__":
     # print(get_words("en", ["e", "t", "x", "p", "h", "z", "o", "l", "i"]))
     # print(get_user_words())
     # display_grid(generate_grid())
     # print(count_appearances('Conjection'))
     # print(check_rules(["e", "t", "x", "p", "h", "z", "o", "l", "i"],"Helio"))
-    results(["hello", "mine", "hihg"], ["hello", "high"], ["hihg"], "results.txt")
+    # results(["hello", "mine", "hihg"], ["hello", "high"], ["hihg"], "results.txt")
+    main()
