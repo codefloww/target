@@ -1,8 +1,9 @@
+'''module that handles the target game'''
 import string
 import random
 
 
-def generate_grid() -> list[list[str]]:
+def generate_grid():
     """Generates list of lists of letters - i.e. grid for the game.
     e.g. [['I', 'G', 'E'], ['P', 'I', 'S'], ['W', 'M', 'G']]
 
@@ -25,7 +26,7 @@ def generate_grid() -> list[list[str]]:
     return letters_grid
 
 
-def display_grid(letters_grid: list[list[str]]) -> None:
+def display_grid(letters_grid) -> None:
     """Displays playing grid of letters
 
     Args:
@@ -37,7 +38,7 @@ def display_grid(letters_grid: list[list[str]]) -> None:
     print(grid[:-1])
 
 
-def count_appearances(word: str) -> list[tuple]:
+def count_appearances(word: str):
     """Checks how many appearance of each letter in word
 
     Args:
@@ -56,7 +57,7 @@ def count_appearances(word: str) -> list[tuple]:
     return counter_letter
 
 
-def check_rules(letters: list[str], word) -> bool:
+def check_rules(letters, word) -> bool:
     """checks whether word is legit due to rules of target game
 
     Args:
@@ -79,7 +80,7 @@ def check_rules(letters: list[str], word) -> bool:
     return correct
 
 
-def get_words(f: str, letters: list[str]) -> list[str]:
+def get_words(file: str, letters):
     """gets all words from file(1 word per line) that
     are legit
 
@@ -91,14 +92,14 @@ def get_words(f: str, letters: list[str]) -> list[str]:
         list[str]: list of words that are with rules
     """
     legal_words = []
-    with open(f, "r") as dictionary:
+    with open(file, "r") as dictionary:
         for word in dictionary.readlines():
             if check_rules(letters, word[:-1]) and word[:-1].lower() not in legal_words:
                 legal_words.append(word[:-1].lower())
     return legal_words
 
 
-def get_user_words() -> list[str]:
+def get_user_words():
     """gets user words(1 per enter) until '' not entered
 
     Returns:
@@ -114,8 +115,7 @@ def get_user_words() -> list[str]:
 
 
 def get_pure_user_words(
-    user_words: list[str], letters: list[str], words_from_dict: list[str]
-) -> list[str]:
+    user_words, letters, words_from_dict):
     """Checks user words with the rules and returns list of those words
     that are not in dictionary.
 
@@ -135,8 +135,7 @@ def get_pure_user_words(
 
 
 def results(
-    words: list[str], legal_words: list[str], pure_words: list[str], file: str
-) -> str:
+    words, legal_words, pure_words, file: str):
     """prints result of game to user and saves result in results.txt
 
     Args:
