@@ -1,1 +1,1 @@
-Please fix type hinting or add typing module to cms servers
+Please fix type hinting or add typing module to cms servers.
